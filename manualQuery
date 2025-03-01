@@ -1,0 +1,36 @@
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+create table if not exists hotel_list (
+id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+hotel_name text not null,
+"location" text not null,
+total_rooms int not null,
+available_rooms int not null
+);
+
+
+create table if not exists booking_details (
+id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+hotel_id UUID not null,
+no_guests int not null,
+no_rooms_booked int not null,
+"action" varchar(10) not null,
+check_in_at timestamp without time zone not null,
+check_out_at timestamp without time zone not null,
+created_at timestamp without time zone default now(),
+modified_at timestamp without time zone default null
+);
+
+
+INSERT INTO hotel_list (hotel_name, "location", total_rooms, available_rooms) VALUES
+('Grand Palace Hotel', 'New York', 50, 50),
+('Ocean View Resort', 'Miami', 40, 40),
+('Mountain Lodge', 'Denver', 30, 30),
+('Sunset Inn', 'Los Angeles', 60, 60),
+('City Center Suites', 'Chicago', 45, 45),
+('Desert Retreat', 'Phoenix', 20, 20),
+('Riverside Hotel', 'San Antonio', 35, 35),
+('Lakeside Resort', 'Orlando', 55, 55),
+('Skyline Tower', 'Seattle', 25, 25),
+('Coastal Breeze Hotel', 'San Diego', 30, 30)
