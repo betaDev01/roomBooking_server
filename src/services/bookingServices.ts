@@ -22,8 +22,8 @@ export class HotelDetails {
       ${params.location ? `where h.location ilike '${params.location}'` : ''}
        order by hotel_name;`;
 
-      const response = await this.client.query(query);
-      return response.rows;
+      const response = await this.client?.query(query);
+      return response?.rows;
     } catch (e) {
       console.log("Error Occured during getHotelList", e)
     }
@@ -33,7 +33,7 @@ export class HotelDetails {
     const query = `UPDATE hotel_list
                     SET available_rooms = available_rooms + (${totalCount})
                     WHERE id = '${params.hotelId}' ;`;
-    await this.client.query(query);
+    await this.client?.query(query);
   }
 
   public async modifyBooking(params: BookingParams) {
@@ -74,8 +74,8 @@ export class HotelDetails {
       if (action !== 'deleted') {
         this.updateHotelAvailableRooms({ hotelId, roomCount: Number(roomsBooked), action })
       }
-      const response = await this.client.query(query);
-      return response.rows;
+      const response = await this.client?.query(query);
+      return response?.rows;
     } catch (e) {
       console.log("Error Occured during getHotelList", e);
     }
@@ -84,8 +84,8 @@ export class HotelDetails {
   public async deleteBooking(params: { bookingId: string }) {
     try {
       const query = `update booking_details set "action" = 'deleted',  modified_at = NOW()  where id='${params.bookingId}' returning *;`;
-      const response = await this.client.query(query);
-      return response.rows;
+      const response = await this.client?.query(query);
+      return response?.rows;
     } catch (e) {
       console.log("Error Occured during getHotelList", e)
     }
@@ -94,8 +94,8 @@ export class HotelDetails {
   public async getBookingDetails() {
     try {
       const query = `select * from booking_details where "action" != 'deleted'  order by modified_at, created_at ;`;
-      const response = await this.client.query(query);
-      return response.rows;
+      const response = await this.client?.query(query);
+      return response?.rows;
     } catch (e) {
       console.log("Error Occured during getHotelList", e)
     }

@@ -7,19 +7,21 @@ export abstract class ConnectDB {
 
   public static getDBInstance() {
     if (!this.instance) {
-      const { Client } = pkg;
+        const { Client } = pkg;
 
-      const dbPort = DATABASE_PORT || 5432;
-      const client = new Client({
-        user: DATABASE_USER,
-        host: DATABASE_URL,
-        database: DATABASE_DB_NAME,
-        password: DATABASE_PASSWORD,
-        port: Number(dbPort)
-      });
-      client.connect();
+        const dbPort = DATABASE_PORT || 5432;
+        const client = new Client({
+          user: DATABASE_USER,
+          host: DATABASE_URL,
+          database: DATABASE_DB_NAME,
+          password: DATABASE_PASSWORD,
+          port: Number(dbPort)
+        });
+        client.connect().then(() => { console.log('DB Connected Successfully') }).catch(e => { console.log("Error Occured in DB Connection", e) });
+
+        this.instance = client;
       
-      this.instance = client;
+
     }
     return this.instance;
   }
