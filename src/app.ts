@@ -12,7 +12,7 @@ export class App {
   public app: express.Application;
   public port: string | number;
   constructor() {
-    this.port = SERVER_PORT || 3000;
+    this.port = SERVER_PORT || 4000;
 
     this.app = express();
     this.initializeMiddlewares();
