@@ -1,12 +1,12 @@
 import 'reflect-metadata';
-import bodyParser from 'body-parser';
 import express from 'express';
 import { useExpressServer } from 'routing-controllers';
 
 import { SERVER_PORT } from './configs/env.config.js';
 import { CustomErrorHandler } from './middlewares/customErrorHandler.js';
-import { RoomBooking } from './controller/roomBookingController.js';
-// import { AuthorizationHandler } from './middlewares/authenticationMiddleware.js';
+import { RoomBookingController } from './controller/roomBookingController.js';
+import { UserController } from './controller/userController.js';
+import { AuthorizationHandler } from './middlewares/authenticationMiddleware.js';
 
 export class App {
   public app: express.Application;
@@ -17,9 +17,21 @@ export class App {
     this.app = express();
     this.initializeMiddlewares();
 
+    // Public Route
     useExpressServer(this.app, {
-      controllers: [RoomBooking],
+      controllers: [UserController],
       middlewares: [CustomErrorHandler],
+      cors: true,
+      defaults: {
+        nullResultCode: 404,
+        undefinedResultCode: 204,
+      },
+    });
+
+    // Private Route
+    useExpressServer(this.app, {
+      controllers: [RoomBookingController],
+      middlewares: [AuthorizationHandler, CustomErrorHandler],
       cors: true,
       defaults: {
         nullResultCode: 404,

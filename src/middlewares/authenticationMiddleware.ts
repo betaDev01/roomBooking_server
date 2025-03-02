@@ -16,8 +16,6 @@ export class AuthorizationHandler implements ExpressMiddlewareInterface {
           response.status(401).send({ message: err.message });
         } else {
           console.log("🚀 ~ AuthorizationHandler ~ jwt.verify ~ decoded:", decoded)
-
-          // request.user = decoded;
           next();
         }
       });

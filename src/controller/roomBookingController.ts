@@ -3,8 +3,8 @@ import type { Response } from 'express';
 import { HotelDetails } from "../services/bookingServices.js";
 import { BookingParams } from "../types/index.js";
 
-@JsonController('/booking')
-export class RoomBooking {
+@JsonController()
+export class RoomBookingController {
   @Get('/list')
   async getHotels(@QueryParam('location') location: string, @Res() res: Response) {
     try {
