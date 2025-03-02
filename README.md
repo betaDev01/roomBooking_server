@@ -122,3 +122,7 @@ curl 'http://localhost:4000/delete?bookingId=f3740c13-3d00-4b2f-94fd-577c80d291d
   -H 'sec-ch-ua-mobile: ?0' \
   -H 'sec-ch-ua-platform: "Linux"'
   ```
+
+## 🧪 Unit Testing
+
+Unit tests need to be implemented to ensure code quality, reliability, and maintainability.
