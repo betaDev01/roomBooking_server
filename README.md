@@ -43,6 +43,13 @@ Clone the repository and install dependencies:
 
 ```npm install```
 
+
+## Database Migration
+
+A migration query has been attached to create the necessary database tables and insert hotel-related data. Ensure you run the migration script before starting the backend service.
+
+```sh File name: manualQuery```
+
 ## ▶️ Running the Application
 
 ```npm start```
