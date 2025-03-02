@@ -71,7 +71,7 @@ export class HotelDetails {
         modified_at = NOW()
       RETURNING *;
       `;
-      if (action !== 'deleted'){
+      if (action !== 'deleted') {
         this.updateHotelAvailableRooms({ hotelId, roomCount: Number(roomsBooked), action })
       }
       const response = await this.client.query(query);
@@ -83,7 +83,7 @@ export class HotelDetails {
 
   public async deleteBooking(params: { bookingId: string }) {
     try {
-      const query = `delete from booking_details where id='${params.bookingId}' returning *;`;
+      const query = `update booking_details set "action" = 'deleted',  modified_at = NOW()  where id='${params.bookingId}' returning *;`;
       const response = await this.client.query(query);
       return response.rows;
     } catch (e) {
